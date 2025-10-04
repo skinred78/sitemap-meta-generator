@@ -6,7 +6,7 @@ Think hard to plan & start working on these tasks follow the Orchestration Proto
 <tasks>$ARGUMENTS</tasks>
 
 ## Workflow:
-1. Use `ui-ux-designer` subagent and `researcher` subagent to create a design plan with TODO tasks in `./plans` directory.
+1. Use `ui-ux-designer` subagent and `researcher` subagent (research about design style, trends, fonts, colors, etc.) to create a design plan with TODO tasks in `./plans` directory.
 2. Then use `ui-ux-designer` subagent to implement the plan step by step.
 3. If user doesn't specify, create the design in pure HTML/CSS/JS.
 4. Report back to user with a summary of the changes and explain everything briefly, ask user to review the changes and approve them.
