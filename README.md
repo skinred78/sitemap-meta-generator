@@ -41,6 +41,39 @@ A comprehensive boilerplate template for building professional software projects
 - Git for version control
 - Node.js 18+ (or your preferred runtime)
 
+## Release Information
+
+This project uses automated releases with semantic versioning:
+
+- **Automatic Releases**: Every push to `main` branch triggers a new release if there are releasable changes
+- **Semantic Versioning**: Version numbers follow [SemVer](https://semver.org/) (MAJOR.MINOR.PATCH)
+- **Conventional Commits**: Use [Conventional Commits](https://conventionalcommits.org/) format for automatic changelog generation
+- **GitHub Releases**: Releases are automatically created on GitHub with generated changelogs
+- **NPM Publishing**: Packages are automatically published to NPM registry
+
+### Commit Message Format
+
+```bash
+# Features (minor version bump)
+feat: add new authentication system
+
+# Bug fixes (patch version bump)
+fix: resolve memory leak in user service
+
+# Breaking changes (major version bump)
+feat!: redesign API endpoints
+# or
+feat: redesign API endpoints
+
+BREAKING CHANGE: API endpoints have been redesigned
+
+# Other types (patch version bump)
+docs: update installation guide
+refactor: simplify database queries
+test: add integration tests
+ci: update GitHub Actions workflow
+```
+
 ### Setup
 1. **Use this template**:
    ```bash
@@ -49,12 +82,20 @@ A comprehensive boilerplate template for building professional software projects
    cd my-project
    ```
 
-2. **Initialize your project**:
+2. **Configure for your repository**:
    ```bash
+   # Update package.json with your repository URL
+   nano package.json  # Update repository.url field
+   
    # Update project details
    nano CLAUDE.md  # Customize for your project
    nano README.md  # Update project information
    ```
+
+3. **Setup GitHub repository secrets** (for automated releases):
+   - Go to your GitHub repository → Settings → Secrets and variables → Actions
+   - Add `NPM_TOKEN`: Your NPM authentication token (if publishing to NPM)
+   - The `GITHUB_TOKEN` is automatically provided by GitHub Actions
 
 3. **Start development**:
    ```bash
