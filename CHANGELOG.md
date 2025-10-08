@@ -1,3 +1,28 @@
+## 1.0.0 (2025-10-08)
+
+
+### 🚀 Features
+
+* add automated release system with semantic versioning ([00121c5](https://github.com/mrgoonie/claudekit-engineer/commit/00121c50a7bf83c3eb49aa123f6092e698c1da71))
+* add Claude and OpenCode agent configurations ([5ce39d8](https://github.com/mrgoonie/claudekit-engineer/commit/5ce39d8de6a5768f7320021d9f9f646b67552ae6))
+* add design and documentation command configurations ([060a9d1](https://github.com/mrgoonie/claudekit-engineer/commit/060a9d1e1e9d2bffa82481b7b214748af0a3b548))
+* enhance design analysis with font prediction and positioning ([25b5a6e](https://github.com/mrgoonie/claudekit-engineer/commit/25b5a6e0541175bc138ddfb16d0cd805ba16ef3c))
+* enhance design workflow with detailed analysis specs ([fc88236](https://github.com/mrgoonie/claudekit-engineer/commit/fc882360ea7852d51afe7af91055c7288b55fe1a))
+
+
+### 🐛 Bug Fixes
+
+* disable NPM publishing by default in semantic-release ([ab7775e](https://github.com/mrgoonie/claudekit-engineer/commit/ab7775e295f2c091974fcaae1b432686841bd4a0))
+* remove npm cache dependency from GitHub Actions workflow ([26cf848](https://github.com/mrgoonie/claudekit-engineer/commit/26cf8488c9bb1f7b9becef233daeae1875625923))
+* skip Husky commit hooks in CI environment ([b1332f5](https://github.com/mrgoonie/claudekit-engineer/commit/b1332f50f9d41f6bf27b9a76e35f1e0d240d64d2))
+* update agent configurations and documentation ([7951821](https://github.com/mrgoonie/claudekit-engineer/commit/7951821e8c3a691d4a33728edf40f6964b80ff15))
+* update CI and command configurations ([8569da4](https://github.com/mrgoonie/claudekit-engineer/commit/8569da47d52700a2812199d4a512905ec4710650))
+
+
+### 📚 Documentation
+
+* expand update command to include README and support additional requests ([c8c1677](https://github.com/mrgoonie/claudekit-engineer/commit/c8c1677a0cacfc668bb3ebdd7d47cea66ca1fe80))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
