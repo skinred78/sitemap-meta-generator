@@ -8,7 +8,7 @@ This project uses [semantic-release](https://semantic-release.gitbook.io/) to au
 
 - Determining the next version number based on commit messages
 - Generating release notes and changelog
-- Publishing to NPM registry
+- Publishing to NPM registry (optional, disabled by default)
 - Creating GitHub releases
 - Updating documentation
 
@@ -31,13 +31,13 @@ The release process is triggered on every push to `main` branch via GitHub Actio
 2. **Version Analysis**: Determine if a release is needed
 3. **Version Calculation**: Calculate next semantic version
 4. **Changelog Generation**: Generate release notes from commits
-5. **Package Publishing**: Publish to NPM registry
+5. **Package Publishing**: Publish to NPM registry (if enabled)
 6. **GitHub Release**: Create GitHub release with assets
 7. **Documentation Update**: Update CHANGELOG.md and commit back
 
 ### 3. Release Artifacts
 Each release creates:
-- **NPM Package**: Published to the NPM registry
+- **NPM Package**: Published to the NPM registry (if npmPublish is enabled)
 - **GitHub Release**: With generated release notes
 - **Git Tags**: Semantic version tags (e.g., `v1.2.3`)
 - **CHANGELOG.md**: Updated with new release notes
@@ -197,7 +197,8 @@ For the automated release system to work, ensure:
    - `main` branch is the default branch
    - GitHub Actions are enabled
 
-2. **NPM Setup** (if publishing to NPM):
+2. **NPM Setup** (optional - only if you want to publish to NPM):
+   - Set `npmPublish: true` in `.releaserc.json`
    - NPM account with appropriate permissions
    - `NPM_TOKEN` secret configured in GitHub repository settings
 

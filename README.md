@@ -49,7 +49,7 @@ This project uses automated releases with semantic versioning:
 - **Semantic Versioning**: Version numbers follow [SemVer](https://semver.org/) (MAJOR.MINOR.PATCH)
 - **Conventional Commits**: Use [Conventional Commits](https://conventionalcommits.org/) format for automatic changelog generation
 - **GitHub Releases**: Releases are automatically created on GitHub with generated changelogs
-- **NPM Publishing**: Packages are automatically published to NPM registry
+- **NPM Publishing**: Optional - can be enabled by setting `npmPublish: true` in `.releaserc.json` and adding NPM_TOKEN secret
 
 ### Commit Message Format
 
@@ -92,9 +92,10 @@ ci: update GitHub Actions workflow
    nano README.md  # Update project information
    ```
 
-3. **Setup GitHub repository secrets** (for automated releases):
+3. **Setup GitHub repository secrets** (optional - for NPM publishing):
    - Go to your GitHub repository → Settings → Secrets and variables → Actions
-   - Add `NPM_TOKEN`: Your NPM authentication token (if publishing to NPM)
+   - Add `NPM_TOKEN`: Your NPM authentication token (only if you want to publish to NPM)
+   - Set `npmPublish: true` in `.releaserc.json` to enable NPM publishing
    - The `GITHUB_TOKEN` is automatically provided by GitHub Actions
 
 3. **Start development**:
