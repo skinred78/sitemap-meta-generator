@@ -1,0 +1,312 @@
+{
+  "brand_name": {
+    "roman": "Edanz",
+    "katakana": "エダンズ",
+    "usage_rules": {
+      "page_titles": "Edanz（エダンズ）",
+      "meta_descriptions": "エダンズ",
+      "all_subsequent_mentions": "エダンズ"
+    },
+    "examples": {
+      "title": "論文サポート | Edanz（エダンズ）",
+      "description": "エダンズは専門家による論文サポートを提供し、研究成果の最大化をサポートします。エダンズの専門サービスで..."
+    }
+  },
+
+  "brand_positioning": {
+    "core_identity": "思考のパートナー (Thinking Partner)",
+    "north_star_message": "研究者が\"より良く・より早く・自信を持って\"論文を発表できるように支援します",
+    "what_we_are_not": [
+      "翻訳会社 (Translation company)",
+      "通訳サービス (Interpretation service)",
+      "単なる編集サービス (Generic editing service)"
+    ]
+  },
+
+  "value_propositions": {
+    "primary_pillars": [
+      {
+        "pillar": "速さとプロフェッショナルさ、品質に妥協しない",
+        "english": "Speed and quality, together, with no compromises",
+        "message": "論文の評判は、お客様の評判。だからこそ丁寧に真摯に向きあう。スピードも品質も、一切の妥協は許さない"
+      },
+      {
+        "pillar": "経験豊富な専門家による、協働的な原稿のブラッシュアップ",
+        "english": "Smart ideas deserve smart feedback",
+        "message": "優れたアイデアには、優れたフィードバックを。エダンズの校正者は、原稿を整えるだけではありません。ともに論文に向き合い、対話と議論を重ねることで、論文を改善・強化し、アクセプトへの道を切り拓きます"
+      },
+      {
+        "pillar": "先進テクノロジーで支える、専門家主導の解決策",
+        "english": "Advanced technology, but thinking/judgment/finesse is entirely human",
+        "message": "思考・判断・繊細な気づきは人間だからこそ。エダンズの価値はそこにあります"
+      },
+      {
+        "pillar": "アクセプトへの知見を活かし、投稿できるレベルの原稿へと導く",
+        "english": "Shape your manuscript with clarity and credibility",
+        "message": "隙のない論文は作れる。投稿前の不安を自信へ"
+      }
+    ],
+    "supporting_evidence": [
+      "多種多様なジャーナルで採択された論文",
+      "実績と信頼",
+      "実際の研究者による評価と結果",
+      "専門家による対応とコンサルテーション型サービス"
+    ]
+  },
+
+  "service_terminology": {
+    "core_proofreading_services": {
+      "when_to_use": "For traditional proofreading/editing service pages",
+      "primary_keywords": [
+        "英文校正",
+        "学術英文校正",
+        "論文校正",
+        "校正サービス"
+      ]
+    },
+    "strategic_support_services": {
+      "when_to_use": "For higher-level consultation, strategic, or specialized services beyond basic proofreading",
+      "do_not_use": ["英文校正", "校正"],
+      "use_instead": [
+        "論文サポート",
+        "研究支援",
+        "出版支援",
+        "ジャーナル選択",
+        "投稿サポート",
+        "アクセプト支援",
+        "研究コンサルテーション"
+      ]
+    }
+  },
+
+  "terminology": {
+    "forbidden_always": [
+      {
+        "term": "編集",
+        "use_instead": "校正 (for proofreading services) OR service-specific terms (for strategic services)"
+      },
+      {
+        "term": "翻訳",
+        "reason": "We are not a translation company"
+      },
+      {
+        "term": "通訳",
+        "reason": "We do not provide interpretation"
+      },
+      {
+        "term": "出版",
+        "use_instead": "アクセプト, 採用, or 発表"
+      },
+      {
+        "term": "あなた",
+        "use_instead": "Third person"
+      }
+    ],
+    "conditional_use": [
+      {
+        "term": "英文校正 / 校正",
+        "use_when": "Describing traditional proofreading/editing services ONLY",
+        "do_not_use_when": "Describing strategic services, consulting, journal selection, or higher-level support"
+      }
+    ],
+    "preferred_terms": [
+      "校正 (proofreading/correction)",
+      "アクセプト (acceptance)",
+      "採用 (acceptance)",
+      "発表 (publication/presentation)",
+      "論文サポート (manuscript support)",
+      "研究成果 (research outcomes)",
+      "専門家 (experts)",
+      "品質 (quality)",
+      "スピード (speed)",
+      "信頼 (trust/reliability)"
+    ]
+  },
+
+  "grammar_rules": {
+    "forbidden_forms": ["ましょう"],
+    "preferred_style": "Direct statements, active voice, concise"
+  },
+
+  "tone_guidelines": {
+    "formality": "Professional/Academic",
+    "voice": "Third person",
+    "attributes": [
+      "Confident but not arrogant",
+      "Professional but accessible",
+      "Clear and direct",
+      "Focus on concrete benefits"
+    ]
+  },
+
+  "emotional_drivers": {
+    "target_researcher_feelings": [
+      "Insecure/Anxious (「欠陥があったらどうしよう」)",
+      "Career-Minded (「この論文で昇進の助けになってほしい」)",
+      "Directionless (「次の一歩が何かわからない」)",
+      "Burned by Rejection (「前回は大失敗だった」)",
+      "Time-Starved (「これを正しく直している時間がない」)",
+      "Value-Conscious (「自腹を切って払っている」)",
+      "Revision Fatigue (「すでに5回も書き直している」)",
+      "Voice-Protective (「もう自分の論文らしく聞こえない」)"
+    ],
+    "messaging_approach": "Address emotional pain points with confidence-building language. Show we understand researcher anxieties while demonstrating expertise."
+  },
+
+  "seo_guidelines": {
+    "titles": {
+      "character_limit": 30,
+      "note": "Keep titles concise. Brand format 'Edanz（エダンズ）' uses 9 characters.",
+      "structure_proofreading": "[英文校正/校正] + descriptor | Edanz（エダンズ）",
+      "structure_strategic": "[Strategic keyword] + benefit | Edanz（エダンズ）"
+    },
+    "descriptions": {
+      "character_limit_mobile_safe": 80,
+      "character_limit_optimal": "100-120",
+      "recommendation": "Aim for 100-120 characters to maximize desktop display while staying safe for mobile",
+      "note": "Front-load important keywords and brand name in first 80 characters for mobile visibility",
+      "must_include": [
+        "エダンズ (at least once, position varies by pattern)",
+        "Specific benefit or outcome",
+        "Primary keyword for the page"
+      ],
+      "avoid": [
+        "Repetitive patterns across pages",
+        "Wasted character space",
+        "Vague or generic claims"
+      ],
+      "patterns": [
+        {
+          "pattern": "Direct benefit statement + エダンズ attribution",
+          "structure": "[Primary keyword]で[specific outcome]を実現。エダンズの[service aspect]が[additional benefit]をサポート。",
+          "example": "専門家による英文校正で論文の品質を向上。エダンズの迅速なサービスが研究の効率化をサポート。",
+          "when_to_use": "Feature-focused pages, service detail pages"
+        },
+        {
+          "pattern": "Problem → Solution",
+          "structure": "[Pain point/challenge]。エダンズは[solution]で[outcome]を実現します。",
+          "example": "投稿先ジャーナルの選択に迷っている方へ。エダンズは専門家の知見で最適な投稿先を迅速に特定します。",
+          "when_to_use": "Solution-oriented pages, consultation services"
+        },
+        {
+          "pattern": "Outcome-first",
+          "structure": "[Desired outcome]を実現。エダンズの[key differentiator]で[secondary benefit]。[Time/quality aspect]。",
+          "example": "研究成果の最大化を実現。エダンズの専門家ネットワークで論文の影響力を向上。スピードと品質の両立。",
+          "when_to_use": "Homepage, main service pages, outcome-focused content"
+        },
+        {
+          "pattern": "Authority + Specificity",
+          "structure": "エダンズの[specific service]は[concrete metric/benefit]。[Expert qualification]により[outcome]をサポート。",
+          "example": "エダンズの学術英文校正は投稿レベルの品質を保証。博士号を持つ専門家が論文のアクセプト率を向上させます。",
+          "when_to_use": "Credibility-focused pages, expert services"
+        },
+        {
+          "pattern": "Feature + Benefit cascade",
+          "structure": "[Feature 1]、[Feature 2]、[Feature 3]で[ultimate outcome]。エダンズが[final benefit]。",
+          "example": "迅速な対応、専門家の知見、柔軟な料金プランで研究者の成功をサポート。エダンズが論文採用への道を開きます。",
+          "when_to_use": "Multi-benefit pages, package/plan pages"
+        },
+        {
+          "pattern": "Comparison/Differentiation",
+          "structure": "[What others do]ではなく、[what we do]。エダンズは[unique approach]で[outcome]を実現。",
+          "example": "単なる言語修正ではなく、論文全体の説得力を強化。エダンズは戦略的なフィードバックでアクセプト成功を実現。",
+          "when_to_use": "Differentiation pages, premium services"
+        },
+        {
+          "pattern": "Process → Result",
+          "structure": "[Step/Process]から[Result]まで。エダンズの[service name]が[timeframe]で[outcome]。",
+          "example": "原稿の作成から投稿まで一貫サポート。エダンズの論文支援サービスが研究者の時間を節約し、採用率を向上。",
+          "when_to_use": "End-to-end services, workflow pages"
+        },
+        {
+          "pattern": "Statistic/Proof-led",
+          "structure": "[Credibility indicator]のエダンズ。[Service]で[specific benefit]を提供し、[outcome]を実現します。",
+          "example": "多様なジャーナルでの採用実績を持つエダンズ。専門家による論文校正で品質を向上させ、投稿の成功を実現します。",
+          "when_to_use": "Trust-building pages, testimonial pages"
+        }
+      ]
+    },
+    "pattern_selection_guidance": {
+      "rotate_patterns": "Use different patterns across pages to avoid repetition",
+      "match_intent": "Choose pattern based on page purpose (feature showcase, problem-solving, authority-building, etc.)",
+      "maximize_characters": "Aim for 100-120 characters to fully utilize meta description space",
+      "front_load_keywords": "Place primary keywords in first 80 characters for mobile display"
+    }
+  },
+
+  "examples_by_service_type": {
+    "proofreading_services": {
+      "titles": [
+        "学術英文校正サービス | Edanz（エダンズ）",
+        "専門的な英文校正 | Edanz（エダンズ）",
+        "論文校正・英文校正 | Edanz（エダンズ）"
+      ],
+      "descriptions_varied": [
+        {
+          "pattern": "Direct benefit",
+          "text": "専門家による英文校正で論文の品質を向上。エダンズの迅速なサービスが研究の効率化をサポートします。",
+          "chars": 58
+        },
+        {
+          "pattern": "Authority + Specificity",
+          "text": "エダンズの学術英文校正は投稿レベルの品質を保証。博士号を持つ専門家が論文のアクセプト率を向上させます。",
+          "chars": 61
+        },
+        {
+          "pattern": "Comparison/Differentiation",
+          "text": "単なる言語修正ではなく、論文全体の説得力を強化。エダンズは専門的なフィードバックで研究の質を高めます。",
+          "chars": 60
+        },
+        {
+          "pattern": "Feature + Benefit cascade",
+          "text": "迅速な対応、専門家による校正、明確なフィードバックで投稿準備を完了。エダンズが論文採用をサポートします。",
+          "chars": 59
+        }
+      ]
+    },
+    "strategic_services": {
+      "titles": [
+        "Edanz（エダンズ）ジャーナルセレクター",
+        "論文サポート | Edanz（エダンズ）",
+        "研究アクセプト支援 | Edanz（エダンズ）"
+      ],
+      "descriptions_varied": [
+        {
+          "pattern": "Problem → Solution",
+          "text": "投稿先ジャーナルの選択に迷っている方へ。エダンズは専門家の知見で最適な投稿先を迅速に特定します。",
+          "chars": 56
+        },
+        {
+          "pattern": "Outcome-first",
+          "text": "研究成果の最大化を実現。エダンズの専門家ネットワークで論文の影響力を向上させ、アクセプト成功をサポート。",
+          "chars": 60
+        },
+        {
+          "pattern": "Process → Result",
+          "text": "原稿の作成から投稿まで一貫サポート。エダンズの論文支援サービスが研究者の時間を節約し、採用率を向上。",
+          "chars": 57
+        },
+        {
+          "pattern": "Authority + Specificity",
+          "text": "エダンズの研究支援サービスは、専門分野の知識を活かした戦略的アドバイスで論文のアクセプト率を大幅に向上。",
+          "chars": 59
+        }
+      ]
+    }
+  },
+
+  "decision_tree": {
+    "question": "What type of service is this page for?",
+    "if_proofreading": {
+      "answer": "Traditional editing/proofreading of English manuscripts",
+      "use_keywords": ["英文校正", "学術英文校正", "論文校正", "校正サービス"],
+      "focus": "Quality of language correction, speed, expert editors"
+    },
+    "if_strategic": {
+      "answer": "Journal selection, publication strategy, research support, consulting",
+      "do_not_use": ["英文校正", "校正"],
+      "use_keywords": ["論文サポート", "研究支援", "ジャーナル選択", "投稿サポート", "アクセプト支援"],
+      "focus": "Strategic outcomes, acceptance rates, research impact"
+    }
+  }
+}

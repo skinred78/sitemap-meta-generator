@@ -1,472 +1,239 @@
-# Claude Code Boilerplate
+# Sitemap Meta Generator
 
-A comprehensive boilerplate template for building professional software projects with **CLI Coding Agents** (**Claude Code** and **Open Code**). This template provides a complete development environment with AI-powered agent orchestration, automated workflows, and intelligent project management.
+A web-based SEO tool that processes XML sitemaps to automatically generate SEO-optimized Japanese page titles and meta descriptions with character counts, outputting results to CSV format.
 
-## What is Claude Code?
+## Purpose
 
-**Claude Code** is Anthropic's official CLI tool that brings AI-powered development assistance directly to your terminal. It enables natural language interaction with your codebase and provides intelligent automation for common development tasks.
+This tool helps SEO professionals and content managers efficiently create optimized meta tags for Japanese websites by:
+- Parsing XML sitemaps to extract URLs
+- Fetching and analyzing each page's existing meta tags
+- Improving meta tags using AI (OpenAI GPT-4o-mini) for Japanese SEO
+- Calculating character counts to ensure SERP display compliance
+- Exporting all data to a structured CSV file
 
-- [Claude Code](https://claude.com/product/claude-code)
-- [Docs](https://docs.claude.com/en/docs/claude-code/overview)
+## Features
 
-**Open Code CLI Coding Agents** extend Claude Code with specialized AI agents that handle specific aspects of software development - from planning and research to testing and documentation. This creates a collaborative AI development team that works alongside human developers.
+- ✅ **Web Interface**: Simple drag-and-drop file upload
+- ✅ **XML Sitemap Parsing**: Automatically extract URLs from sitemap files
+- ✅ **AI-Powered Improvement**: Uses OpenAI to improve existing meta tags for Japanese SEO
+- ✅ **Style Guide Compliance**: Validates content against configurable Japanese style rules (terminology, grammar, tone)
+- ✅ **Smart Model Selection**: GPT-4o (fast/cheap) with automatic o1-mini retry on low compliance (<85%)
+- ✅ **Compliance Scoring**: 0-100% score with detailed violation tracking
+- ✅ **Character Count Validation**: Ensure optimal length for Google SERP display (30-35 chars for titles, 80-120 for descriptions)
+- ✅ **Real-time Processing**: See progress as URLs are processed
+- ✅ **CSV Export**: Clean, structured output with UTF-8 BOM for proper Japanese encoding
+- ✅ **Error Handling**: Gracefully handle unreachable URLs or parsing errors
 
-- [Open Code](https://opencode.ai/)
-- [Docs](https://opencode.ai/docs)
+## Style Guide System
 
-## Related Projects & Directories
+This tool enforces Japanese content quality through configurable style rules. See [docs/style-guide.md](docs/style-guide.md) for details.
 
-- `claudekit` - Website of ClaudeKit
-  - Directory: `../claudekit`
-  - Repo: https://github.com/claudekit/claudekit
-- `claudekit-marketing` - Marketing Kit repository
-  - Directory: `../claudekit-marketing`
-  - Repo: https://github.com/claudekit/claudekit-marketing
-- `claudekit-cli` - CLI tool for quick project setup
-  - Directory: `../claudekit-cli`
-  - Repo: https://github.com/mrgoonie/claudekit-cli
-- `claudekit-docs` - Public documentation repository: https://docs.claudekit.cc
-  - Directory: `../claudekit-docs`
-  - Repo: https://github.com/claudekit/claudekit-docs
+### Quick Overview
 
-## Key Benefits
+**Rule Categories**:
+- Forbidden terms (e.g., あなた - too informal)
+- Required terms (e.g., 校正 for proofreading context)
+- Forbidden grammar (e.g., ましょう - avoid suggestion form)
+- Tone guidelines (professional, third-person)
 
-### 🚀 Accelerated Development
-- **AI-Powered Planning**: Automated technical planning and architecture design
-- **Intelligent Code Generation**: Context-aware code creation and modification
-- **Automated Testing**: Comprehensive test generation and execution
-- **Smart Documentation**: Synchronized docs that evolve with your code
+**Validation Process**:
+1. GPT-4o generates meta tags
+2. Validator scores compliance (0-100%)
+3. If < 85%, auto-retry with o1-mini
+4. Results show score + violations in UI
 
-### 🎯 Enhanced Quality
-- **Multi-Agent Code Review**: Specialized agents for security, performance, and standards
-- **Automated Quality Assurance**: Continuous testing and validation
-- **Best Practices Enforcement**: Built-in adherence to coding standards
-- **Security-First Development**: Proactive security analysis and recommendations
+**Cost Trade-off**:
+- GPT-4o: Fast, cheap ($0.001/URL), ~70-80% compliance
+- o1-mini: Slower, expensive ($0.015/URL), ~95-100% compliance
 
-### 🏗️ Structured Workflow
-- **Agent Orchestration**: Coordinated AI agents working in parallel and sequential workflows
-- **Task Management**: Automated project tracking and progress monitoring
-- **Documentation Sync**: Always up-to-date technical documentation
-- **Clean Git Workflow**: Professional commit messages and branch management
+### Configuration
 
-## Quick Start
+Edit `lib/style-guide.json`:
+
+```json
+{
+  "terminology": {
+    "forbidden": [{"term": "あなた", "reason": "Too informal"}],
+    "required": [{"term": "校正", "note": "Use for proofreading"}]
+  },
+  "grammar": {
+    "forbidden_forms": [{"form": "ましょう", "reason": "Avoid suggestions"}]
+  },
+  "tone": {
+    "formality": "Professional/Academic",
+    "pov": "Third person"
+  }
+}
+```
+
+## SEO Best Practices
+
+### Japanese Title Tags
+- **Optimal Length**: 30-35 characters
+- **Best Practices**:
+  - Include primary keywords naturally
+  - Be compelling and descriptive
+  - Avoid keyword stuffing
+  - Front-load important terms
+
+### Japanese Meta Descriptions
+- **Optimal Length**: 80-120 characters
+- **Best Practices**:
+  - Provide clear value proposition
+  - Include call-to-action when appropriate
+  - Use natural language
+  - Complement (don't duplicate) the title
+
+## Output Format
+
+CSV file with the following columns:
+- `URL`: The page URL from the sitemap
+- `Page Title`: SEO-optimized Japanese page title
+- `Meta Description`: SEO-optimized Japanese meta description
+- `Title Char Count`: Number of characters in the title
+- `Description Char Count`: Number of characters in the description
+
+## Tech Stack
+
+- **Framework**: Next.js 14 App Router
+- **Runtime**: Node.js 18+
+- **Styling**: Tailwind CSS
+- **XML Parsing**: fast-xml-parser
+- **Web Scraping**: Cheerio + Axios
+- **CSV Generation**: PapaParse
+- **AI Integration**: OpenAI GPT-4o-mini for Japanese meta tag improvement
+- **Concurrency**: p-limit for rate-limited URL processing
+
+## Getting Started
 
 ### Prerequisites
-- [Claude Code](https://claude.ai/code) installed and configured
-- Git for version control
-- Node.js 18+ (or your preferred runtime)
+- Node.js 18 or higher
+- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
 
-## Release Information
-
-This project uses automated releases with semantic versioning:
-
-- **Automatic Releases**: Every push to `main` branch triggers a new release if there are releasable changes
-- **Semantic Versioning**: Version numbers follow [SemVer](https://semver.org/) (MAJOR.MINOR.PATCH)
-- **Conventional Commits**: Use [Conventional Commits](https://conventionalcommits.org/) format for automatic changelog generation
-- **GitHub Releases**: Releases are automatically created on GitHub with generated changelogs
-- **NPM Publishing**: Optional - can be enabled by setting `npmPublish: true` in `.releaserc.json` and adding NPM_TOKEN secret
-
-### Commit Message Format
+### Installation
 
 ```bash
-# Features (minor version bump)
-feat: add new authentication system
+# Clone the repository
+git clone https://github.com/sam/sitemap-meta-generator.git
+cd sitemap-meta-generator
 
-# Bug fixes (patch version bump)
-fix: resolve memory leak in user service
+# Install dependencies
+npm install
 
-# Breaking changes (major version bump)
-feat!: redesign API endpoints
-# or
-feat: redesign API endpoints
-
-BREAKING CHANGE: API endpoints have been redesigned
-
-# Other types (patch version bump)
-docs: update installation guide
-refactor: simplify database queries
-test: add integration tests
-ci: update GitHub Actions workflow
+# Configure environment variables
+cp .env.example .env.local
+# Edit .env.local and add your OpenAI API key:
+# OPENAI_API_KEY=sk-...
 ```
 
-### Setup
-1. **Use this template**:
-   ```bash
-   # Create new project from this template
-   git clone https://github.com/your-username/claude-code-template.git my-project
-   cd my-project
-   ```
-
-2. **Configure for your repository**:
-   ```bash
-   # Update package.json with your repository URL
-   nano package.json  # Update repository.url field
-   
-   # Update project details
-   nano CLAUDE.md  # Customize for your project
-   nano README.md  # Update project information
-   ```
-
-3. **Setup GitHub repository secrets** (optional - for NPM publishing):
-   - Go to your GitHub repository → Settings → Secrets and variables → Actions
-   - Add `NPM_TOKEN`: Your NPM authentication token (only if you want to publish to NPM)
-   - Set `npmPublish: true` in `.releaserc.json` to enable NPM publishing
-   - The `GITHUB_TOKEN` is automatically provided by GitHub Actions
-
-3. **Start development**:
-   ```bash
-   # Begin with Claude Code
-   claude
-
-   # Or use specific commands
-   /plan "implement user authentication"
-   /cook "add database integration"
-   ```
-
-## Project Structure
-
-```
-├── .claude/                 # Claude Code configuration
-│   ├── CLAUDE.md           # Global development instructions
-│   └── send-discord.sh     # Notification script
-├── .opencode/              # Open Code CLI agent definitions
-│   ├── agent/              # Specialized agent configurations
-│   │   ├── planner.md      # Technical planning agent
-│   │   ├── researcher.md   # Research and analysis agent
-│   │   ├── tester.md       # Testing and validation agent
-│   │   ├── debugger.md     # Issue analysis agent
-│   │   ├── code-reviewer.md# Code quality agent
-│   │   ├── docs-manager.md # Documentation agent
-│   │   ├── git-manager.md  # Version control agent
-│   │   └── project-manager.md # Progress tracking agent
-│   └── command/            # Custom command definitions
-├── docs/                   # Project documentation
-│   ├── codebase-summary.md # Auto-generated codebase overview
-│   ├── code-standards.md   # Development standards
-│   ├── project-overview-pdr.md # Product requirements
-│   └── development-roadmap.md  # Project roadmap
-├── plans/                  # Implementation plans and reports
-│   ├── templates/          # Plan templates
-│   └── reports/            # Agent-to-agent communication
-├── CLAUDE.md              # Project-specific Claude instructions
-├── AGENTS.md              # Agent coordination guidelines
-└── README.md              # This file
-```
-
-## The AI Agent Team
-
-This boilerplate includes specialized AI agents that work together to deliver high-quality software:
-
-### 🎯 Core Development Agents
-
-#### **Planner Agent**
-- Researches technical approaches and best practices
-- Creates comprehensive implementation plans
-- Analyzes architectural trade-offs
-- Spawns multiple researcher agents for parallel investigation
-
-#### **Researcher Agent**
-- Investigates specific technologies and frameworks
-- Analyzes existing solutions and patterns
-- Provides technical recommendations
-- Supports the planner with detailed findings
-
-#### **Tester Agent**
-- Generates comprehensive test suites
-- Validates functionality and performance
-- Ensures cross-platform compatibility
-- Reports on test coverage and quality metrics
-
-### 🔍 Quality Assurance Agents
-
-#### **Code Reviewer Agent**
-- Performs automated code quality analysis
-- Enforces coding standards and conventions
-- Identifies security vulnerabilities
-- Provides improvement recommendations
-
-#### **Debugger Agent**
-- Analyzes application logs and error reports
-- Diagnoses performance bottlenecks
-- Investigates CI/CD pipeline issues
-- Provides root cause analysis
-
-### 📚 Documentation & Management Agents
-
-#### **Docs Manager Agent**
-- Maintains synchronized technical documentation
-- Updates API documentation automatically
-- Ensures documentation accuracy
-- Manages codebase summaries
-
-#### **Git Manager Agent**
-- Creates clean, conventional commit messages
-- Manages branching and merge strategies
-- Handles version control workflows
-- Ensures professional git history
-
-#### **Project Manager Agent**
-- Tracks development progress and milestones
-- Updates project roadmaps and timelines
-- Manages task completion verification
-- Maintains project health metrics
-
-## Agent Orchestration Patterns
-
-### Sequential Chaining
-Use when tasks have dependencies:
-```bash
-# Planning → Implementation → Testing → Review
-/plan "implement user dashboard"
-# Wait for plan completion, then:
-/cook "follow the implementation plan"
-# After implementation:
-/test "validate dashboard functionality"
-# Finally:
-/review "ensure code quality standards"
-```
-
-### Parallel Execution
-Use for independent tasks:
-```bash
-# Multiple researchers exploring different approaches
-planner agent spawns:
-- researcher (database options)
-- researcher (authentication methods)
-- researcher (UI frameworks)
-# All report back to planner simultaneously
-```
-
-### Context Management
-- Agents communicate through file system reports
-- Context is preserved between agent handoffs
-- Fresh context prevents conversation degradation
-- Essential information is documented in markdown
-
-## Development Workflow
-
-### 1. Feature Development
-```bash
-# Start with planning
-/plan "add real-time notifications"
-
-# Research phase (automatic)
-# Multiple researcher agents investigate approaches
-
-# Implementation
-/cook "implement notification system"
-
-# Quality assurance
-/test
-/review
-
-# Documentation update
-/docs
-
-# Project tracking
-/watzup  # Check project status
-```
-
-### 2. Bug Fixing
-```bash
-# Analyze the issue
-/debug "investigate login failures"
-
-# Create fix plan
-/plan "resolve authentication bug"
-
-# Implement solution
-/fix "authentication issue"
-
-# Validate fix
-/test
-```
-
-### 3. Documentation Management
-```bash
-# Update documentation
-/docs
-
-# Generate codebase summary
-repomix  # Creates ./docs/codebase-summary.md
-
-# Review project status
-/watzup
-```
-
-## Configuration Files
-
-### CLAUDE.md
-Project-specific instructions for Claude Code. Customize this file to define:
-- Project architecture guidelines
-- Development standards and conventions
-- Agent coordination protocols
-- Specific workflows for your project
-
-### .opencode/agent/*.md
-Individual agent configurations defining:
-- Agent expertise and responsibilities
-- Interaction patterns
-- Output formats
-- Quality standards
-
-### plans/templates/*.md
-Reusable templates for:
-- Feature implementation plans
-- Bug fix procedures
-- Refactoring strategies
-- Architecture decisions
-
-## Model Context Protocol (MCP)
-
-### Context7
-```bash
-export UPSTASH_API_KEY="..."
-claude mcp add context7 -s user -- npx -y @upstash/context7-mcp --api-key $UPSTASH_API_KEY
-```
-
-### Human
+### Usage
 
 ```bash
-export GOOGLE_GEMINI_API_KEY="..."
-claude mcp add-json human -s user '{"command": "npx", "args": ["@goonnguyen/human-mcp@latest", "-e", "GOOGLE_GEMINI_API_KEY"], "env": { "GOOGLE_GEMINI_API_KEY": $GOOGLE_GEMINI_API_KEY }}'
+# Start the development server
+npm run dev
+
+# Open your browser to http://localhost:3000
+# Upload your sitemap.xml file
+# Wait for processing to complete
+# Download the CSV with improved meta tags
 ```
 
-## Best Practices
+### Production Build
 
-### Development Principles
-- **YANGI**: You Aren't Gonna Need It - avoid over-engineering
-- **KISS**: Keep It Simple, Stupid - prefer simple solutions
-- **DRY**: Don't Repeat Yourself - eliminate code duplication
-
-### Code Quality
-- All code changes go through automated review
-- Comprehensive testing is mandatory
-- Security considerations are built-in
-- Performance optimization is continuous
-
-### Documentation
-- Documentation evolves with code changes
-- API docs are automatically updated
-- Architecture decisions are recorded
-- Codebase summaries are regularly refreshed
-
-### Git Workflow
-- Clean, conventional commit messages
-- Professional git history
-- No AI attribution in commits
-- Focused, atomic commits
-
-## Usage Examples
-
-### Starting a New Feature
 ```bash
-# Research and plan
-claude "I need to implement user authentication with OAuth2"
-# Planner agent creates comprehensive plan
+# Build for production
+npm run build
 
-# Follow the plan
-claude "Implement the authentication plan"
-# Implementation follows the detailed plan
-
-# Ensure quality
-claude "Review and test the authentication system"
-# Testing and code review agents validate the implementation
+# Start production server
+npm start
 ```
 
-### Debugging Issues
-```bash
-# Investigate problem
-claude "Debug the slow database queries"
-# Debugger agent analyzes logs and performance
+## Development with ClaudeKit
 
-# Create solution
-claude "Optimize the identified query performance issues"
-# Implementation follows debugging recommendations
+This project is built using [ClaudeKit](https://claudekit.cc/), which provides AI-powered agent orchestration for efficient development.
 
-# Validate fix
-claude "Test query performance improvements"
-# Tester agent validates the optimization
+### Available Commands
+
+- `/plan` - Create implementation plans
+- `/cook` - Execute planned features
+- `/test` - Run tests and validation
+- `/review` - Perform code quality review
+- `/docs` - Update documentation
+
+### Project Structure
+
+```
+├── .claude/              # Claude Code configuration
+├── .opencode/            # Agent definitions
+├── docs/                 # Documentation
+│   └── style-guide.md    # Style guide system docs
+├── app/                  # Next.js App Router
+│   ├── api/              # API routes
+│   │   └── process/      # Sitemap processing endpoint
+│   ├── globals.css       # Global styles
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Main page with compliance UI
+├── lib/                  # Core functionality
+│   ├── style-guide/      # Style guide system
+│   │   ├── types.ts      # TypeScript interfaces
+│   │   ├── config.ts     # Config loader
+│   │   ├── validator.ts  # Compliance validation
+│   │   └── prompt-builder.ts # Prompt injection
+│   ├── style-guide.json  # Style rules config
+│   ├── sitemap-parser.ts # XML sitemap parsing
+│   ├── url-fetcher.ts    # URL fetching and meta extraction
+│   └── meta-improver.ts  # LLM with GPT-4o/o1-mini retry
+└── plans/                # Implementation plans
 ```
 
-### Project Maintenance
-```bash
-# Check project health
-claude "What's the current project status?"
-# Project manager provides comprehensive status
+## How It Works
 
-# Update documentation
-claude "Sync documentation with recent changes"
-# Docs manager updates all relevant documentation
+1. **Upload**: Drag and drop your sitemap.xml file
+2. **Parse**: URLs are extracted from the sitemap (limited to 100 URLs in MVP)
+3. **Fetch**: Each URL is fetched to extract existing title and meta description
+4. **Improve**: OpenAI improves meta tags following Japanese style guide:
+   - **First attempt**: GPT-4o (fast, ~$0.10 per 100 URLs)
+   - **Auto-retry**: o1-mini if compliance < 85% (~$1.50 per 100 URLs)
+   - Validates: forbidden terms, required terms, grammar rules, tone
+   - Titles: 30-35 characters (optimal for Google SERP)
+   - Descriptions: 80-120 characters (optimal for Google SERP)
+5. **Validate**: Each result scored 0-100% on style compliance
+6. **Export**: Download results as CSV with compliance scores and violations
 
-# Plan next sprint
-claude "Plan the next development phase"
-# Planner creates detailed roadmap for upcoming work
-```
+## Limitations (MVP)
 
-## Advanced Features
+- Processes up to 100 URLs per sitemap
+- Concurrent processing limited to 5 URLs at a time
+- 10-second timeout per URL fetch
+- Requires OpenAI API key
+  - GPT-4o only: ~$0.10 per 100 URLs (if all pass first attempt)
+  - With o1-mini retries: ~$0.10-1.50 per 100 URLs (depends on compliance rate)
 
-### Multi-Project Support
-- Manage multiple repositories simultaneously
-- Shared agent configurations across projects
-- Consistent development patterns
+## Future Enhancements
 
-### Custom Agent Creation
-- Define project-specific agents
-- Extend existing agent capabilities
-- Create domain-specific expertise
-
-### Integration Capabilities
-- Discord notifications for project updates
-- GitHub Actions integration
-- CI/CD pipeline enhancement
-
-## Customization Guide
-
-### 1. Project Setup
-- Update `CLAUDE.md` with your project specifics
-- Modify agent configurations in `.opencode/agent/`
-- Customize plan templates in `plans/templates/`
-
-### 2. Agent Specialization
-- Add domain-specific knowledge to agents
-- Create custom agents for unique requirements
-- Configure agent interaction patterns
-
-### 3. Workflow Optimization
-- Define project-specific commands
-- Create shortcuts for common tasks
-- Establish team coding standards
+- [ ] Unlimited URL processing
+- [ ] Advanced rate limiting with robots.txt respect
+- [ ] Job persistence and history
+- [ ] Progress tracking with websockets
+- [ ] Sitemap index support (nested sitemaps)
+- [ ] Batch job queue
+- [ ] User authentication for team deployment
+- [ ] Custom LLM configuration
 
 ## Contributing
 
-1. Fork this repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Follow the agent orchestration workflow
-4. Ensure all tests pass and documentation is updated
-5. Create a Pull Request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see LICENSE file for details
 
-## Learn More
+## Support
 
-### Claude Code Resources
-- [Claude Code Documentation](https://claude.ai/code)
-- [Open Code CLI Documentation](https://docs.opencode.ai)
-- [Agent Development Guide](https://docs.opencode.ai/agents)
-
-### Community
-- [Claude Code Community](https://discord.gg/claude-code)
-- [Discussion Forum](https://github.com/anthropic/claude-code/discussions)
-- [Example Projects](https://github.com/topics/claude-code)
-
-### Support
-- [Issue Tracker](https://github.com/anthropic/claude-code/issues)
-- [Feature Requests](https://github.com/anthropic/claude-code/discussions/categories/ideas)
-- [Documentation](https://docs.claude.ai/code)
+For issues and questions:
+- Create an issue: https://github.com/sam/sitemap-meta-generator/issues
+- Documentation: See `/docs` folder
 
 ---
 
-**Start building with AI-powered development today!** This boilerplate provides everything you need to create professional software with intelligent agent assistance.
+Built with [ClaudeKit](https://claudekit.cc/) - AI-powered development workflows

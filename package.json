@@ -1,9 +1,12 @@
 {
-  "name": "claudekit-engineer",
-  "version": "1.8.1",
-  "description": "A comprehensive boilerplate template for building professional software projects with CLI Coding Agents (Claude Code and Open Code).",
+  "name": "sitemap-meta-generator",
+  "version": "0.1.0",
+  "description": "SEO tool that processes XML sitemaps to generate Japanese page titles and meta descriptions with character counts, outputting to CSV format.",
   "main": "index.js",
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "test": "echo \"Warning: no test specified\" && exit 0",
     "lint": "echo \"Linting passed\"",
     "semantic-release": "semantic-release",
@@ -11,22 +14,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/claudekit/claudekit-engineer.git"
+    "url": "https://github.com/sam/sitemap-meta-generator.git"
   },
   "keywords": [
-    "claude-code",
-    "ai-agents",
-    "development-template",
-    "boilerplate",
-    "automation",
-    "cli-tools"
+    "seo",
+    "sitemap",
+    "meta-tags",
+    "japanese",
+    "csv-export",
+    "web-scraping",
+    "claude-code"
   ],
-  "author": "Duy Nguyen",
+  "author": "Sam",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/claudekit/claudekit-engineer/issues"
+    "url": "https://github.com/sam/sitemap-meta-generator/issues"
   },
-  "homepage": "https://github.com/claudekit/claudekit-engineer#readme",
+  "homepage": "https://github.com/sam/sitemap-meta-generator#readme",
   "files": [
     ".claude/",
     ".opencode/",
@@ -48,14 +52,33 @@
     "@semantic-release/github": "^9.2.6",
     "@semantic-release/npm": "^11.0.2",
     "@semantic-release/release-notes-generator": "^12.1.0",
+    "@types/node": "^24.9.2",
+    "@types/papaparse": "^5.3.16",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "autoprefixer": "^10.4.21",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "husky": "^8.0.3",
-    "semantic-release": "^22.0.12"
+    "postcss": "^8.5.6",
+    "semantic-release": "^22.0.12",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "axios": "^1.13.1",
+    "cheerio": "^1.1.2",
+    "fast-xml-parser": "^5.3.0",
+    "next": "^16.0.1",
+    "openai": "^6.7.0",
+    "p-limit": "^7.2.0",
+    "papaparse": "^5.5.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   }
 }

@@ -2,6 +2,24 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Project: Sitemap Meta Generator
+
+A tool that processes XML sitemaps to generate SEO-optimized Japanese page titles and meta descriptions.
+
+### Core Requirements
+- **Input**: XML sitemap file containing URLs
+- **Processing**: For each URL, fetch the page and generate/extract:
+  - Japanese page title (SEO optimized)
+  - Japanese meta description (SEO optimized)
+  - Character counts for both
+- **Output**: CSV file with columns: URL, Page Title, Meta Description, Title Char Count, Description Char Count
+
+### SEO Best Practices
+- Japanese title length: 30-35 characters (optimal for Google SERP display)
+- Japanese meta description length: 80-120 characters (optimal for Google SERP display)
+- Titles should be compelling and include primary keywords
+- Descriptions should provide clear value proposition
+
 ## Role & Responsibilities
 
 Your role is to analyze user requirements, delegate tasks to appropriate sub-agents, and ensure cohesive delivery of features that meet specifications and architectural standards.
