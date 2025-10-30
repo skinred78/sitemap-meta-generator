@@ -19,12 +19,11 @@ runConfig:
   minInstances: 0  # Scale to zero when idle (saves costs)
   maxInstances: 10  # Limit concurrent instances
 
-  # Environment variables and secrets
-  env:
-    - variable: NODE_ENV
-      value: production
-    - variable: GOOGLE_API_KEY
-      secret: GOOGLE_API_KEY
+  # Environment variables
+  environmentVariables:
+    NODE_ENV: production
+    # Vertex AI uses Application Default Credentials (ADC)
+    # No API key needed - authentication is automatic in Cloud Run
 
 # Build configuration
 buildConfig:
