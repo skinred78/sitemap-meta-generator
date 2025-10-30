@@ -24,8 +24,13 @@ runConfig:
 env:
   - variable: NODE_ENV
     value: production
+    availability:
+      - BUILD
+      - RUNTIME
   - variable: OPENAI_API_KEY
     secret: OPENAI_API_KEY
+    availability:
+      - RUNTIME
 
 # Build configuration
 buildConfig:
