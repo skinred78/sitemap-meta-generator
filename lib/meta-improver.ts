@@ -1,18 +1,17 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import { loadStyleGuide } from './style-guide/config';
 import { validateStyleCompliance } from './style-guide/validator';
 import { buildStyleGuidePrompt } from './style-guide/prompt-builder';
 import type { ImprovedMeta } from './style-guide/types';
 
 // Lazy-load Gemini client to avoid initialization during build phase
-let genAI: GoogleGenerativeAI | null = null;
-function getGenAI(): GoogleGenerativeAI {
+// New SDK reads GEMINI_API_KEY from environment automatically
+let genAI: GoogleGenAI | null = null;
+function getGenAI(): GoogleGenAI {
   if (!genAI) {
-    const apiKey = process.env.GOOGLE_API_KEY;
-    if (!apiKey) {
-      throw new Error('GOOGLE_API_KEY environment variable is not set');
-    }
-    genAI = new GoogleGenerativeAI(apiKey);
+    genAI = new GoogleGenAI({
+      apiKey: process.env.GOOGLE_API_KEY,
+    });
   }
   return genAI;
 }
@@ -35,19 +34,19 @@ async function generateWithModel(
     existingDescription
   );
 
-  const genai = getGenAI();
-  const generativeModel = genai.getGenerativeModel({
+  const ai = getGenAI();
+
+  const response = await ai.models.generateContent({
     model: model,
-    generationConfig: {
+    contents: prompt,
+    config: {
       temperature: 0.7,
       responseMimeType: 'application/json',
+      systemInstruction: 'You are an SEO expert specializing in Japanese content optimization. Follow the style guide rules strictly. Return your response as JSON with "title" and "description" fields.',
     },
-    systemInstruction: 'You are an SEO expert specializing in Japanese content optimization. Follow the style guide rules strictly. Return your response as JSON with "title" and "description" fields.'
   });
 
-  const result = await generativeModel.generateContent(prompt);
-  const response = result.response;
-  const content = response.text();
+  const content = response.text || '{}';
 
   // Parse JSON response
   let parsed;
