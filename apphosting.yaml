@@ -23,13 +23,7 @@ runConfig:
   # Use Cloud Secret Manager for sensitive values
   environmentVariables:
     NODE_ENV: production
-    # OPENAI_API_KEY configured via Cloud Secret Manager
-    # Available at both build and runtime
-    OPENAI_API_KEY:
-      secret: OPENAI_API_KEY
-      availability:
-        - BUILD
-        - RUNTIME
+    # OPENAI_API_KEY will be injected at runtime via Cloud Secret Manager
 
 # Build configuration
 buildConfig:

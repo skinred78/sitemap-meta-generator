@@ -4,9 +4,16 @@ import { validateStyleCompliance } from './style-guide/validator';
 import { buildStyleGuidePrompt } from './style-guide/prompt-builder';
 import type { ImprovedMeta } from './style-guide/types';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Lazy-load OpenAI client to avoid initialization during build phase
+let openaiClient: OpenAI | null = null;
+function getOpenAI(): OpenAI {
+  if (!openaiClient) {
+    openaiClient = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openaiClient;
+}
 
 const styleGuide = loadStyleGuide();
 
@@ -29,6 +36,7 @@ async function generateWithModel(
   // o1 models don't support response_format or temperature
   const isO1Model = model.startsWith('o1');
 
+  const openai = getOpenAI();
   const completion = await openai.chat.completions.create({
     model,
     messages: [
