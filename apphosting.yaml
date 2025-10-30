@@ -27,11 +27,11 @@ runConfig:
 
 # Build configuration
 buildConfig:
-  # Build command (optional - defaults to package.json scripts)
-  # buildCommand: npm run build
+  # Build command
+  buildCommand: npm run build
 
-  # Install command (optional)
-  # installCommand: npm ci
+  # Install command (use npm ci for consistent CI builds)
+  installCommand: npm ci --legacy-peer-deps
 
 # Health check (optional)
 # healthCheck:
