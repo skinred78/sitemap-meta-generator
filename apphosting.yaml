@@ -19,13 +19,13 @@ runConfig:
   minInstances: 0  # Scale to zero when idle (saves costs)
   maxInstances: 10  # Limit concurrent instances
 
-  # Environment variables (using correct Firebase App Hosting syntax)
-  # Use Cloud Secret Manager for sensitive values
-  env:
-    - variable: NODE_ENV
-      value: production
-    - variable: OPENAI_API_KEY
-      secret: OPENAI_API_KEY
+# Environment variables (at root level per Firebase docs)
+# Use Cloud Secret Manager for sensitive values
+env:
+  - variable: NODE_ENV
+    value: production
+  - variable: OPENAI_API_KEY
+    secret: OPENAI_API_KEY
 
 # Build configuration
 buildConfig:
