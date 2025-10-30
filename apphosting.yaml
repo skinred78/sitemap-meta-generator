@@ -19,12 +19,16 @@ runConfig:
   minInstances: 0  # Scale to zero when idle (saves costs)
   maxInstances: 10  # Limit concurrent instances
 
-  # Environment variables
-  env:
-    - variable: NODE_ENV
-      value: production
-    - variable: GOOGLE_API_KEY
-      secret: GOOGLE_API_KEY
+# Environment variables and secrets
+env:
+  - variable: NODE_ENV
+    value: production
+    availability:
+      - RUNTIME
+  - variable: GOOGLE_API_KEY
+    secret: GOOGLE_API_KEY
+    availability:
+      - RUNTIME
 
 # Build configuration
 buildConfig:
