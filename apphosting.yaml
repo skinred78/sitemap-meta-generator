@@ -31,7 +31,7 @@ buildConfig:
   buildCommand: npm run build
 
   # Install command (use npm ci for consistent CI builds)
-  installCommand: npm ci --legacy-peer-deps
+  installCommand: npm ci
 
 # Health check (optional)
 # healthCheck:
