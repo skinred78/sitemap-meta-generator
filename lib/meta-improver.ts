@@ -11,7 +11,8 @@ function getVertexAI(): VertexAI {
   if (!vertexAI) {
     // Get project ID from environment or use the Firebase project
     const projectId = process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT || 'sitemap-meta-generator';
-    const location = process.env.VERTEX_AI_LOCATION || 'asia-east1';
+    // Use us-central1 where Gemini models are available
+    const location = process.env.VERTEX_AI_LOCATION || 'us-central1';
 
     vertexAI = new VertexAI({
       project: projectId,
