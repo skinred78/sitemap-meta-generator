@@ -72,9 +72,9 @@ export async function improveJapaneseMeta(
 ): Promise<ImprovedMeta> {
   try {
     // Model selection based on attempt
-    // gemini-1.5-flash: Fast and efficient for most tasks
-    // gemini-1.5-pro: More powerful for better compliance
-    const model = attempt === 1 ? 'gemini-1.5-flash' : 'gemini-1.5-pro';
+    // gemini-2.5-flash: Fast and efficient for most tasks
+    // gemini-2.5-pro: More powerful for better compliance
+    const model = attempt === 1 ? 'gemini-2.5-flash' : 'gemini-2.5-pro';
 
     console.log(`[${url}] Attempt ${attempt} with ${model}`);
 
@@ -93,7 +93,7 @@ export async function improveJapaneseMeta(
 
     // If compliance is poor and we haven't tried the better model yet, retry
     if (compliance.score < 85 && attempt === 1) {
-      console.log(`[${url}] Retrying with gemini-1.5-pro for better compliance`);
+      console.log(`[${url}] Retrying with gemini-2.5-pro for better compliance`);
       return improveJapaneseMeta(url, existingTitle, existingDescription, 2);
     }
 
@@ -126,7 +126,7 @@ export async function improveJapaneseMeta(
       titleCharCount: title.length,
       descriptionCharCount: description.length,
       compliance,
-      model: attempt === 1 ? 'gemini-1.5-flash (failed)' : 'gemini-1.5-pro (failed)',
+      model: attempt === 1 ? 'gemini-2.5-flash (failed)' : 'gemini-2.5-pro (failed)',
       retryCount: attempt,
     };
   }
