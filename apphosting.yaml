@@ -23,8 +23,8 @@ runConfig:
   env:
     - variable: NODE_ENV
       value: production
-    - variable: OPENAI_API_KEY
-      secret: OPENAI_API_KEY
+    - variable: GOOGLE_API_KEY
+      secret: GOOGLE_API_KEY
 
 # Build configuration
 buildConfig:

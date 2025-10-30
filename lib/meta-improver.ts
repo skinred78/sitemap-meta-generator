@@ -1,18 +1,20 @@
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { loadStyleGuide } from './style-guide/config';
 import { validateStyleCompliance } from './style-guide/validator';
 import { buildStyleGuidePrompt } from './style-guide/prompt-builder';
 import type { ImprovedMeta } from './style-guide/types';
 
-// Lazy-load OpenAI client to avoid initialization during build phase
-let openaiClient: OpenAI | null = null;
-function getOpenAI(): OpenAI {
-  if (!openaiClient) {
-    openaiClient = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
+// Lazy-load Gemini client to avoid initialization during build phase
+let geminiClient: GoogleGenerativeAI | null = null;
+function getGemini(): GoogleGenerativeAI {
+  if (!geminiClient) {
+    const apiKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error('GOOGLE_API_KEY or GEMINI_API_KEY environment variable is required');
+    }
+    geminiClient = new GoogleGenerativeAI(apiKey);
   }
-  return openaiClient;
+  return geminiClient;
 }
 
 const styleGuide = loadStyleGuide();
@@ -33,42 +35,35 @@ async function generateWithModel(
     existingDescription
   );
 
-  // o1 models don't support response_format or temperature
-  const isO1Model = model.startsWith('o1');
-
-  const openai = getOpenAI();
-  const completion = await openai.chat.completions.create({
+  const gemini = getGemini();
+  const generativeModel = gemini.getGenerativeModel({
     model,
-    messages: [
-      {
-        role: 'system',
-        content: 'You are an SEO expert specializing in Japanese content optimization. Follow the style guide rules strictly.',
-      },
-      {
-        role: 'user',
-        content: prompt,
-      },
-    ],
-    ...(isO1Model ? {} : {
-      response_format: { type: 'json_object' },
+    generationConfig: {
       temperature: 0.7,
-    }),
+      responseMimeType: 'application/json',
+    },
   });
 
-  const content = completion.choices[0].message.content || '{}';
+  const systemInstruction = 'You are an SEO expert specializing in Japanese content optimization. Follow the style guide rules strictly. Return your response as JSON with "title" and "description" fields.';
+  const fullPrompt = `${systemInstruction}\n\n${prompt}`;
 
-  // For o1 models, extract JSON from response (may have additional text)
-  let result;
-  if (model.startsWith('o1')) {
+  const result = await generativeModel.generateContent(fullPrompt);
+  const response = result.response;
+  const content = response.text();
+
+  // Parse JSON response
+  let parsed;
+  try {
+    parsed = JSON.parse(content);
+  } catch (error) {
+    // If direct parse fails, try to extract JSON from the response
     const jsonMatch = content.match(/\{[\s\S]*\}/);
-    result = JSON.parse(jsonMatch?.[0] || '{}');
-  } else {
-    result = JSON.parse(content);
+    parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {};
   }
 
   return {
-    title: result.title || existingTitle || 'タイトルなし',
-    description: result.description || existingDescription || '説明なし',
+    title: parsed.title || existingTitle || 'タイトルなし',
+    description: parsed.description || existingDescription || '説明なし',
   };
 }
 
@@ -80,7 +75,9 @@ export async function improveJapaneseMeta(
 ): Promise<ImprovedMeta> {
   try {
     // Model selection based on attempt
-    const model = attempt === 1 ? 'gpt-4o' : 'o1-mini';
+    // gemini-1.5-flash: Fast and efficient for most tasks
+    // gemini-1.5-pro: More powerful for better compliance
+    const model = attempt === 1 ? 'gemini-1.5-flash' : 'gemini-1.5-pro';
 
     console.log(`[${url}] Attempt ${attempt} with ${model}`);
 
@@ -99,7 +96,7 @@ export async function improveJapaneseMeta(
 
     // If compliance is poor and we haven't tried the better model yet, retry
     if (compliance.score < 85 && attempt === 1) {
-      console.log(`[${url}] Retrying with o1-mini for better compliance`);
+      console.log(`[${url}] Retrying with gemini-1.5-pro for better compliance`);
       return improveJapaneseMeta(url, existingTitle, existingDescription, 2);
     }
 
@@ -132,7 +129,7 @@ export async function improveJapaneseMeta(
       titleCharCount: title.length,
       descriptionCharCount: description.length,
       compliance,
-      model: attempt === 1 ? 'gpt-4o (failed)' : 'o1-mini (failed)',
+      model: attempt === 1 ? 'gemini-1.5-flash (failed)' : 'gemini-1.5-pro (failed)',
       retryCount: attempt,
     };
   }
