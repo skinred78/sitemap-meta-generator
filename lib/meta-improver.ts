@@ -1,25 +1,20 @@
-import { VertexAI } from '@google-cloud/vertexai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { loadStyleGuide } from './style-guide/config';
 import { validateStyleCompliance } from './style-guide/validator';
 import { buildStyleGuidePrompt } from './style-guide/prompt-builder';
 import type { ImprovedMeta } from './style-guide/types';
 
-// Lazy-load Vertex AI client to avoid initialization during build phase
-// Uses Application Default Credentials (ADC) - no API key needed in production
-let vertexAI: VertexAI | null = null;
-function getVertexAI(): VertexAI {
-  if (!vertexAI) {
-    // Get project ID from environment or use the Firebase project
-    const projectId = process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT || 'sitemap-meta-generator';
-    // Use us-central1 where Gemini models are available
-    const location = process.env.VERTEX_AI_LOCATION || 'us-central1';
-
-    vertexAI = new VertexAI({
-      project: projectId,
-      location: location,
-    });
+// Lazy-load Gemini client to avoid initialization during build phase
+let genAI: GoogleGenerativeAI | null = null;
+function getGenAI(): GoogleGenerativeAI {
+  if (!genAI) {
+    const apiKey = process.env.GOOGLE_API_KEY;
+    if (!apiKey) {
+      throw new Error('GOOGLE_API_KEY environment variable is not set');
+    }
+    genAI = new GoogleGenerativeAI(apiKey);
   }
-  return vertexAI;
+  return genAI;
 }
 
 const styleGuide = loadStyleGuide();
@@ -40,27 +35,19 @@ async function generateWithModel(
     existingDescription
   );
 
-  const vertexai = getVertexAI();
-  const generativeModel = vertexai.preview.getGenerativeModel({
+  const genai = getGenAI();
+  const generativeModel = genai.getGenerativeModel({
     model: model,
     generationConfig: {
       temperature: 0.7,
       responseMimeType: 'application/json',
     },
-    systemInstruction: {
-      role: 'system',
-      parts: [{
-        text: 'You are an SEO expert specializing in Japanese content optimization. Follow the style guide rules strictly. Return your response as JSON with "title" and "description" fields.'
-      }]
-    }
+    systemInstruction: 'You are an SEO expert specializing in Japanese content optimization. Follow the style guide rules strictly. Return your response as JSON with "title" and "description" fields.'
   });
 
-  const result = await generativeModel.generateContent({
-    contents: [{ role: 'user', parts: [{ text: prompt }] }],
-  });
-
+  const result = await generativeModel.generateContent(prompt);
   const response = result.response;
-  const content = response.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
+  const content = response.text();
 
   // Parse JSON response
   let parsed;
