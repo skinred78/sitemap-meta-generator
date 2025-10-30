@@ -1,0 +1,41 @@
+# Firebase App Hosting configuration
+# https://firebase.google.com/docs/app-hosting/configure
+
+# Runtime configuration
+runConfig:
+  # Node.js version
+  runtime: nodejs20
+
+  # Memory allocation (256Mi, 512Mi, 1Gi, 2Gi, 4Gi, 8Gi)
+  memory: 1Gi
+
+  # CPU allocation (0.5, 1, 2, 4, 8)
+  cpu: 1
+
+  # Maximum concurrent requests per instance
+  concurrency: 80
+
+  # Autoscaling
+  minInstances: 0  # Scale to zero when idle (saves costs)
+  maxInstances: 10  # Limit concurrent instances
+
+  # Environment variables (non-secret values only)
+  # Use Cloud Secret Manager for sensitive values
+  environmentVariables:
+    NODE_ENV: production
+    # OPENAI_API_KEY will be set via: firebase apphosting:secrets:set OPENAI_API_KEY
+
+# Build configuration
+buildConfig:
+  # Build command (optional - defaults to package.json scripts)
+  # buildCommand: npm run build
+
+  # Install command (optional)
+  # installCommand: npm ci
+
+# Health check (optional)
+# healthCheck:
+#   path: /api/health
+#   interval: 60s
+#   timeout: 10s
+#   unhealthyThreshold: 3

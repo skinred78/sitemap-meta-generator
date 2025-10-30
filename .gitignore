@@ -63,3 +63,9 @@ docs/screenshots/*
 docs/journals
 logs.txt
 test-ck
+
+# firebase
+.firebase
+firebase-debug.log*
+firestore-debug.log*
+ui-debug.log*
